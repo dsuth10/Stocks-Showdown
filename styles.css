@@ -1,0 +1,430 @@
+:root {
+  --bg-color: #181c20;
+  --text-color: #f5f5f5;
+  --accent-color: #4caf50;
+  --error-color: #f44336;
+  --card-bg: #242a2e;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.header {
+  padding: 1.5rem 0 1rem 0;
+  text-align: center;
+  background: var(--card-bg);
+  border-bottom: 1px solid #222;
+}
+
+.stock-listings, .portfolio, .transaction-feed, .controls {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+  }
+  .header {
+    font-size: 1.2rem;
+  }
+  .stock-listings, .portfolio, .transaction-feed, .controls {
+    padding: 1rem;
+  }
+}
+
+/* Utility classes */
+.flex-row { display: flex; flex-direction: row; }
+.flex-col { display: flex; flex-direction: column; }
+.centered { justify-content: center; align-items: center; }
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(24,28,32,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: var(--card-bg);
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#username-input {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: #222;
+  color: var(--text-color);
+}
+#login-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent-color);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#login-btn:hover {
+  background: #388e3c;
+}
+#user-info {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+#logout-btn {
+  background: var(--error-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+#logout-btn:hover {
+  background: #b71c1c;
+}
+
+/* Stock card styles */
+.stock-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+.stock-info {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.stock-chart {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.stock-actions {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-change.positive {
+  color: #4caf50;
+}
+
+.price-change.negative {
+  color: #f44336;
+}
+
+.buy-btn, .sell-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.buy-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.sell-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.buy-btn:hover, .sell-btn:hover {
+  filter: brightness(1.1);
+}
+
+.transactions-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+.transactions-list::-webkit-scrollbar {
+  width: 8px;
+}
+.transactions-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.transactions-list::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.transaction-item {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid;
+}
+.transaction-item.buy {
+  border-left-color: #4caf50;
+}
+.transaction-item.sell {
+  border-left-color: #f44336;
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.transaction-type {
+  font-weight: bold;
+}
+.transaction-item.buy .transaction-type {
+  color: #4caf50;
+}
+.transaction-item.sell .transaction-type {
+  color: #f44336;
+}
+.transaction-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+.transaction-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.transaction-student {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 600px) {
+  .transactions-list {
+    max-height: 250px;
+    padding-right: 4px;
+  }
+  .transaction-details {
+    grid-template-columns: 1fr;
+    font-size: 0.95em;
+  }
+  .transaction-header {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.leaderboard-table th {
+  background-color: rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+
+.leaderboard-table tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.leaderboard-table tbody tr:first-child {
+  font-weight: bold;
+  color: gold;
+}
+
+.leaderboard-table tbody tr:nth-child(2) {
+  color: silver;
+}
+
+.leaderboard-table tbody tr:nth-child(3) {
+  color: #cd7f32; /* bronze */
+}
+
+.report-buttons {
+  margin: 1rem 0;
+}
+
+.report-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.report-btn:hover {
+  background-color: #0d8bf2;
+}
+
+/* Login interface styles */
+.login-form {
+  max-width: 400px;
+  margin: 3rem auto 2rem auto;
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.form-group {
+  display: flex;
+  margin: 1rem 0;
+}
+.error-message {
+  color: var(--error-color);
+  font-size: 0.95rem;
+  min-height: 1.2rem;
+  margin-top: 0.5rem;
+}
+#current-user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.teacher-controls-panel {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #ff9800; /* Orange highlight for teacher controls */
+}
+.controls-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.control-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.control-btn:not(.danger) {
+  background-color: #ff9800;
+  color: white;
+}
+.control-btn:not(.danger):hover {
+  background-color: #f57c00;
+}
+.control-btn.danger {
+  background-color: #f44336;
+  color: white;
+}
+.control-btn.danger:hover {
+  background-color: #d32f2f;
+}
+.game-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+#current-day {
+  font-weight: bold;
+  color: #ff9800;
+}
+
+.feedback {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, opacity 0.3s;
+  transform: translateX(0);
+  opacity: 1;
+}
+.feedback.feedback-show {
+  animation: slide-in 0.3s forwards;
+}
+.feedback.feedback-hide {
+  animation: slide-out 0.3s forwards;
+}
+@keyframes slide-in {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-out {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+.feedback.success {
+  background-color: #4caf50;
+}
+.feedback.error {
+  background-color: #f44336;
+}
+.feedback.info {
+  background-color: #2196f3;
+}
+.feedback.warning {
+  background-color: #ff9800;
+} 

@@ -1,0 +1,131 @@
+**Product Requirements Document (PRD)**
+
+**Product Name:** Stock Market Game
+
+**Overview:**
+The Stock Market Game is a browser-based educational simulation tool designed for high school classrooms. Students learn about the stock market by making trades in a simplified, real-time stock trading environment. Teachers oversee the game, control its progression, and receive comprehensive performance reports.
+
+---
+
+**Goals:**
+
+* Teach students the fundamentals of stock trading and portfolio management
+* Encourage engagement through interactive gameplay
+* Provide teachers with tools to oversee and evaluate student participation
+
+---
+
+**Target Users:**
+
+* **Students:** High school level, play the game individually
+* **Teachers:** High school educators, manage game progression and monitor students
+
+---
+
+**User Roles & Access:**
+
+* **Student Access:**
+
+  * Join the game by entering a unique name
+  * View and manage their own portfolio only
+  * Make buy/sell decisions
+  * Access and download their own transaction history and portfolio data
+
+* **Teacher Access:**
+
+  * Log in using the name "teacher" (no password)
+  * Control game progression (e.g., advance day, reset game)
+  * View all student portfolios and transaction logs
+  * Download full game reports including rankings
+  * View leaderboard (students ranked by portfolio value)
+
+---
+
+**Game Mechanics:**
+
+* **Single Global Game State:**
+
+  * All students and teachers interact in a shared game session
+  * State is saved in localStorage for persistence
+
+* **Initial Settings:**
+
+  * Each student starts with \$1,000 in virtual cash
+  * Seven fixed, real-world stock tickers and names are used
+  * Initial stock prices are realistic and randomized within predefined ranges
+
+* **Stock Price Fluctuation:**
+
+  * Each day, prices change randomly within a hardcoded range of -10% to +10%
+  * Each stock maintains a 100-day history for charting purposes
+
+---
+
+**Features & Interface Design:**
+
+* **Theme & Layout:**
+
+  * Dark theme (#181c20 background)
+  * Light text with vibrant color highlights
+  * Responsive container layout with generous padding
+  * Clean sans-serif typography (Segoe UI, Arial)
+
+* **Stock Price Cards:**
+
+  * Display ticker, current price, price change indicator (arrow + %), mini line chart
+  * Buy/Sell buttons with modern styling and hover effects
+
+* **Mini Charts:**
+
+  * Line chart per stock showing historical performance
+  * Dynamically scaled Y-axis with min/max labels
+  * Colored line matches app accent
+
+* **Portfolios:**
+
+  * Card per student showing cash and shares held
+  * Students only see their own; teachers see all
+
+* **Transactions:**
+
+  * Scrollable feed of buy/sell actions with timestamps
+  * Color-coded (green = buy, red = sell)
+
+* **Controls:**
+
+  * "Next Day" button (teacher only) to advance simulation
+  * "Reset Game" button (teacher only) clears all data and starts fresh
+
+* **Reports:**
+
+  * Students can download personal reports (CSV)
+  * Teachers can download full reports (CSV) including all data and rankings
+
+* **Leaderboard:**
+
+  * Ranking of students by portfolio value
+  * Visible only to the teacher
+
+---
+
+**Error Handling & Feedback:**
+
+* Invalid actions (e.g., insufficient funds, duplicate name) trigger prominent, color-coded feedback messages
+* High contrast and clear focus styles for accessibility
+
+---
+
+**Technical Notes:**
+
+* State persistence via localStorage
+* No user authentication or password system
+* UI built with responsive modern CSS (grid, flexbox, custom scrollbars)
+* Application is browser-based and does not require server backend
+
+---
+
+**Future Considerations (Out of Scope):**
+
+* Multi-classroom support with join codes
+* Password-protected teacher accounts
+* Admin dashboard for school-wide tracking

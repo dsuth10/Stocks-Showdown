@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="login-container"></div>
+  <div id="feedback" class="feedback" style="display:none; text-align:center; margin:1rem auto; max-width:600px;"></div>
+  <div id="game-container" class="container" style="display:none;">
+    <header class="header">
+      <h1>Stock Market Game</h1>
+      <div id="current-user-container">
+        <div>Logged in as: <span id="current-user"></span></div>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </header>
+    <main>
+      <section id="stocks-container"></section>
+      <section id="stock-listings" class="stock-listings">
+        <!-- Stock cards will be rendered here -->
+      </section>
+      <div class="report-buttons">
+        <button id="student-report-btn" class="report-btn">Download My Report</button>
+        <button id="teacher-report-btn" class="report-btn">Download Full Report</button>
+      </div>
+      <section id="portfolio" class="portfolio">
+        <div id="portfolio-container"></div>
+        <!-- Portfolio info will be rendered here -->
+      </section>
+      <section id="transactions-section">
+        <h2>Transaction History</h2>
+        <div id="transactions-container"></div>
+      </section>
+      <div id="leaderboard-container" style="margin-top:2rem;"></div>
+      <section id="transaction-feed" class="transaction-feed">
+        <!-- Transaction feed will be rendered here -->
+      </section>
+      <section id="controls" class="controls" data-role="teacher" style="display:none;">
+        <button id="next-day-btn">Next Day</button>
+        <!-- Teacher controls will be rendered here -->
+      </section>
+    </main>
+  </div>
+  <div id="teacher-dashboard" style="display: none; margin: 2rem auto; max-width: 1200px;">
+    <h2>Teacher Dashboard</h2>
+    <div id="dashboard-students"></div>
+    <div id="dashboard-transactions" style="margin-top: 2rem;"></div>
+    <div id="dashboard-controls" style="margin-top: 2rem;"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html> 
